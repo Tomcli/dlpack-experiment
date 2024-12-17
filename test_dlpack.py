@@ -20,7 +20,7 @@ for i in range(5):
     # -------------------------------
     # Step 3: Import DLPack into TensorFlow
     # -------------------------------
-    with tf.device('/GPU:' + str(os.environ["LOCAL_RANK"])):  # Ensure GPU compatibility
+    with tf.device('/GPU:' + str(os.getenv("LOCAL_RANK", "0")):  # Ensure GPU compatibility
         tf_tensor = tf.experimental.dlpack.from_dlpack(dlpack_capsule)
         
     print("TensorFlow Tensor Shape:", tf_tensor.shape)
@@ -50,7 +50,7 @@ for i in range(5):
     # -------------------------------
     # Step 5: Feed Tensor into TensorFlow Model
     # -------------------------------
-    with tf.device('/GPU:' + str(os.environ["LOCAL_RANK"])):  # Ensure model and data are on the GPU
+    with tf.device('/GPU:' + str(os.getenv("LOCAL_RANK", "0")):  # Ensure model and data are on the GPU
         output = model(tf_tensor)
 
     print("Model Output Shape:", output.shape)  # Expected shape: (204762, 10)
