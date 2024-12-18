@@ -83,24 +83,6 @@ def main(args):
         print(f"Rank {rank}: TensorFlow Tensor Generated on: {generated_tf_tensor.device}")
 
         # Step 2: Export PyTorch Tensor as DLPack and import into TensorFlow
-        # if args.dlpack_mode == "pytorch_to_tf":
-        #     tensor_to_convert = generated_pytorch_tensor
-        #     dlpack_capsule = dlpack.to_dlpack(tensor_to_convert)
-        #     tensor = from_dlpack(dlpack_capsule)
-        # elif args.dlpack_mode == "tf_only":
-        #     tensor_to_convert = generated_tf_tensor
-        #     dlpack_capsule = to_dlpack(tensor_to_convert)
-        #     tensor = from_dlpack(dlpack_capsule)
-        # elif args.dlpack_mode == "pytorch_only":
-        #     tensor_to_convert = generated_pytorch_tensor
-        #     dlpack_capsule = dlpack.to_dlpack(tensor_to_convert)
-        #     tensor = dlpack.from_dlpack(dlpack_capsule)
-        # else:
-        #     tensor_to_convert = generated_tf_tensor
-        #     dlpack_capsule = to_dlpack(tensor_to_convert)
-        #     tensor = dlpack.from_dlpack(dlpack_capsule)        
-        # print(f"Rank {rank}: Converted Tensor Shape: {tensor.shape}")
-
         # Map the mode to corresponding tensors and conversion functions
         tensor_mapping = {
             "pytorch_to_tf": (generated_pytorch_tensor, dlpack.to_dlpack, from_dlpack),
